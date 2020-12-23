@@ -1,6 +1,6 @@
 package lang;
 
-public class Symbol  {
+public class Symbol {
     final String ns;
     final String name;
     transient String _str;
