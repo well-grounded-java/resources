@@ -1,7 +1,7 @@
 package lang;
 
 public class Var implements IFn {
-    volatile Object root;
+    private volatile Object root;
 
     public final Symbol sym;
     public final Namespace ns;
