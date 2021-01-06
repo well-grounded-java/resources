@@ -25,4 +25,8 @@ hs_err_pid*
 # IntelliJ
 .idea/
 out/
+build/
 *.iml
+
+# Gradle local
+.gradle/
