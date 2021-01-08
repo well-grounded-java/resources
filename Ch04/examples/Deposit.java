@@ -43,4 +43,29 @@ public class Deposit {
         return new Deposit(newAmount, date, payee);
     }
 
+    public static class DepositBuilder implements Builder<Deposit> {
+        private double amount;
+        private LocalDate date;
+        private Account payee;
+
+        public DepositBuilder amount(double amount) {
+            this.amount = amount;
+            return this;
+        }
+
+        public DepositBuilder date(LocalDate date) {
+            this.date = date;
+            return this;
+        }
+
+        public DepositBuilder payee(Account payee) {
+            this.payee = payee;
+            return this;
+        }
+
+        @Override
+        public Deposit build() {
+            return new Deposit(amount, date, payee);
+        }
+    }
 }
