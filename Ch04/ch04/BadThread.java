@@ -1,4 +1,4 @@
-package examples;
+package ch04;
 
 public class BadThread {
     public static void main(String[] args) {

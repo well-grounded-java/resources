@@ -1,4 +1,4 @@
-package examples;
+package ch04;
 
 public class FSOMain {
     private static final int MAX_TRANSFERS = 1_000;

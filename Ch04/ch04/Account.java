@@ -1,4 +1,4 @@
-package examples;
+package ch04;
 
 public class Account {
     private final double atmFeePercent = 0.01;

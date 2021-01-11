@@ -1,4 +1,4 @@
-package examples;
+package ch04;
 
 public class FSOAccount {
     private double balance;

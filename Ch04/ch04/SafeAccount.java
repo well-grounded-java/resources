@@ -1,4 +1,4 @@
-package examples;
+package ch04;
 
 public class SafeAccount {
     private static int nextAccountId = 1;
