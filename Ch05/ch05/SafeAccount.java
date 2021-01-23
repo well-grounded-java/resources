@@ -1,8 +1,10 @@
 package ch05;
 
+import java.util.concurrent.atomic.AtomicReference;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
+import java.util.HashMap;
 
 public class SafeAccount {
     private static AtomicInteger nextAccountId = new AtomicInteger(1);
