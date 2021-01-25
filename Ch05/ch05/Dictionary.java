@@ -17,24 +17,6 @@ public class Dictionary implements Map<String, String> {
     }
 
     @Override
-    public boolean containsKey(Object key) {
-        return getEntry(key) != null;
-    }
-
-    @Override
-    public boolean containsValue(Object value) {
-        if (value == null)
-            return false;
-
-        Node[] tab = table;
-        for (int i = 0; i < tab.length ; i++)
-            for (Node e = tab[i]; e != null ; e = e.next)
-                if (value.equals(e.value))
-                    return true;
-        return false;
-    }
-
-    @Override
     public String get(Object key) {
         if (key == null)
             return null;
@@ -65,20 +47,35 @@ public class Dictionary implements Map<String, String> {
             }
         }
 
-        addEntry(hash, key, value, i);
+        Node e = table[i];
+        table[i] = new Node(hash, key, value, e);
+
         return null;
     }
 
     @Override
     public String remove(Object key) {
-        Node e = removeEntryForKey(key);
+        int hash = (key == null) ? 0 : hash(key.hashCode());
+        int i = indexFor(hash, table.length);
+        Node prev = table[i];
+        Node e = prev;
+
+        while (e != null) {
+            Node next = e.next;
+            Object k;
+            if (e.hash == hash &&
+                    ((k = e.key) == key || (key != null && key.equals(k)))) {
+                size--;
+                if (prev == e)
+                    table[i] = next;
+                else
+                    prev.next = next;
+            }
+            prev = e;
+            e = next;
+        }
+
         return (e == null ? null : e.value);
-    }
-
-
-    @Override
-    public void putAll(Map<? extends String, ? extends String> m) {
-        throw new UnsupportedOperationException();
     }
 
     @Override
@@ -89,6 +86,41 @@ public class Dictionary implements Map<String, String> {
             for (int i = 0; i < tab.length; ++i)
                 tab[i] = null;
         }
+    }
+
+    @Override
+    public boolean containsKey(Object key) {
+        int hash = (key == null) ? 0 : hash(key.hashCode());
+        for (Node e = table[indexFor(hash, table.length)];
+             e != null;
+             e = e.next) {
+            Object k;
+            if (e.hash == hash &&
+                    ((k = e.key) == key || (key != null && key.equals(k))))
+                return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean containsValue(Object value) {
+        if (value == null)
+            return false;
+
+        Node[] tab = table;
+        for (int i = 0; i < tab.length ; i++)
+            for (Node e = tab[i]; e != null ; e = e.next)
+                if (value.equals(e.value))
+                    return true;
+        return false;
+    }
+
+    ////////////////////////////////
+    // Unsupported
+
+    @Override
+    public void putAll(Map<? extends String, ? extends String> m) {
+        throw new UnsupportedOperationException();
     }
 
     @Override
@@ -106,48 +138,7 @@ public class Dictionary implements Map<String, String> {
         throw new UnsupportedOperationException();
     }
 
-    final Node getEntry(Object key) {
-        int hash = (key == null) ? 0 : hash(key.hashCode());
-        for (Node e = table[indexFor(hash, table.length)];
-             e != null;
-             e = e.next) {
-            Object k;
-            if (e.hash == hash &&
-                    ((k = e.key) == key || (key != null && key.equals(k))))
-                return e;
-        }
-        return null;
-    }
-
-    void addEntry(int hash, String key, String value, int bucketIndex) {
-        Node e = table[bucketIndex];
-        table[bucketIndex] = new Node(hash, key, value, e);
-    }
-
-    final Node removeEntryForKey(Object key) {
-        int hash = (key == null) ? 0 : hash(key.hashCode());
-        int i = indexFor(hash, table.length);
-        Node prev = table[i];
-        Node e = prev;
-
-        while (e != null) {
-            Node next = e.next;
-            Object k;
-            if (e.hash == hash &&
-                    ((k = e.key) == key || (key != null && key.equals(k)))) {
-                size--;
-                if (prev == e)
-                    table[i] = next;
-                else
-                    prev.next = next;
-                return e;
-            }
-            prev = e;
-            e = next;
-        }
-
-        return e;
-    }
+    ////////////////////////////////
 
     static int indexFor(int h, int length) {
         return h & (length-1);
@@ -188,8 +179,8 @@ public class Dictionary implements Map<String, String> {
         public final boolean equals(Object o) {
             if (o == this)
                 return true;
-            if (o instanceof Map.Entry) {
-                Map.Entry<?,?> e = (Map.Entry<?,?>)o;
+            if (o instanceof Node) {
+                Node e = (Node)o;
                 if (Objects.equals(key, e.getKey()) &&
                         Objects.equals(value, e.getValue()))
                     return true;
