@@ -1,19 +1,17 @@
-package ch05;
+package ch05.accounts;
 
-import java.util.concurrent.atomic.AtomicReference;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
-import java.util.HashMap;
 
-public class SafeAccount {
+public class Account {
     private static AtomicInteger nextAccountId = new AtomicInteger(1);
 
     private final int accountId;
     private double balance;
     private final Lock lock = new ReentrantLock();
 
-    public SafeAccount(int openingBalance) {
+    public Account(int openingBalance) {
         balance = openingBalance;
         accountId = nextAccountId.getAndIncrement();
     }
@@ -42,7 +40,7 @@ public class SafeAccount {
         }
     }
 
-    public boolean transferTo(final SafeAccount other, final int amount) {
+    public boolean transferTo(final Account other, final int amount) {
         // Check to see amount > 0, throw if not
         if (accountId == other.getAccountId()) {
             // Can't transfer to your own account
@@ -97,5 +95,14 @@ public class SafeAccount {
 
     public int getAccountId() {
         return accountId;
+    }
+
+    @Override
+    public String toString() {
+        return "Account{" +
+                "accountId=" + accountId +
+                ", balance=" + balance +
+                ", lock=" + lock +
+                '}';
     }
 }

@@ -15,11 +15,13 @@ public class FutureExamples {
             try {
                 result = fut.get(60, TimeUnit.SECONDS);
             } catch (TimeoutException tox) {
-              tox.printStackTrace();
+              // Timed out - nothing to do
             } catch (InterruptedException e) {
                 e.printStackTrace();
+                break;
             } catch (ExecutionException e) {
                 e.printStackTrace();
+                break;
             }
 
             System.out.println("Still not found the billionth prime!");
