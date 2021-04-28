@@ -10,7 +10,7 @@ public class Ch13Examples {
         LocalDate ld = LocalDate.of(1984, Month.APRIL, 13);
         LocalDate dec = ld.withMonth(12);
         System.out.println(dec);
-        System.out.println(tailrecFactorial(6));
+//        System.out.println(tailrecFactorial(6));
 
         var f = makePrefixer("NaNa");
         System.out.println(doubleApplier("Batman", f));
@@ -22,20 +22,6 @@ public class Ch13Examples {
         } else {
             return n * simpleFactorial(n - 1);
         }
-    }
-
-    private static long helpFact(long i, long j) {
-        if (i == 0) {
-            return j;
-        }
-        return helpFact(i - 1, i * j);
-    }
-
-    public static long tailrecFactorial(long n) {
-        if (n <= 0) {
-            return 1;
-        }
-        return helpFact(n, 1);
     }
 
     public static Function<String, String> makePrefixer(String prefix) {
