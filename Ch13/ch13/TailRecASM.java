@@ -19,6 +19,7 @@ public class TailRecASM {
 
     public static void main(String[] args) {
         TailRecASM self = new TailRecASM("TailRecFactorial");
+
         try {
             self.writeClazz();
         } catch (IOException e) {

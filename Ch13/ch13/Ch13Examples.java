@@ -2,7 +2,10 @@ package ch13;
 
 import java.time.LocalDate;
 import java.time.Month;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.Callable;
 import java.util.function.Function;
+import java.util.function.Supplier;
 
 public class Ch13Examples {
 
@@ -14,6 +17,19 @@ public class Ch13Examples {
 
         var f = makePrefixer("NaNa");
         System.out.println(doubleApplier("Batman", f));
+
+        Function<String, Function<String, String>> hof = prefix -> s -> prefix +": "+ s;
+    }
+
+    public static Function<Integer, Integer> closure() {
+        var atomic = new AtomicInteger(0);
+        return i -> atomic.addAndGet(i);
+    }
+
+    public static void currying() {
+        BiFunction<Integer, LocalDate, String> bif = (i, d) -> "Count for "+ d + " = "+ i;
+        Function<LocalDate, String> withCount = bif.curry1(42);
+        Function<Integer, String> forToday = bif.curry2(LocalDate.now());
     }
 
     public static long simpleFactorial(long n) {
