@@ -15,7 +15,9 @@ public class FutureExamples {
             try {
                 result = fut.get(60, TimeUnit.SECONDS);
             } catch (TimeoutException tox) {
-              // Timed out - nothing to do
+                // Timed out - better cancel the task
+                System.err.println("Task timed out, cancelling");
+                fut.cancel(true);
             } catch (InterruptedException e) {
                 e.printStackTrace();
                 break;

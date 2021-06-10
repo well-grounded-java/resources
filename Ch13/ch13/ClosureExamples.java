@@ -22,6 +22,7 @@ public class ClosureExamples {
         var i = new AtomicInteger(42);
         Function<String, String> f = s -> s + i.get();
         i.set(37);
+//      i = new AtomicInteger(42);
         System.out.println(f.apply("Hello "));
     }
 

@@ -14,6 +14,7 @@ public class Account {
     public Account(int openingBalance) {
         balance = openingBalance;
         accountId = nextAccountId.getAndIncrement();
+        lock.newCondition();
     }
 
     public boolean withdraw(final int amount) {
