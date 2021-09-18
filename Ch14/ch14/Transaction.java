@@ -1,7 +1,5 @@
 package ch14;
 
-import ch05.accounts.Account;
-
 import java.time.LocalDateTime;
 import java.util.Comparator;
 import java.util.concurrent.atomic.AtomicLong;
@@ -29,14 +27,7 @@ public class Transaction implements Comparable<Transaction> {
 
     @Override
     public int compareTo(Transaction other) {
-        if (other == null) {
-            throw new IllegalArgumentException("Cannot compare to null");
-        }
-        if (this.time == null || other.time == null) {
-            throw new IllegalArgumentException("Cannot compare to null time: "+ this +" ; "+ other);
-        }
-        return this.time.compareTo(other.time);
-//        return Comparator.nullsFirst(LocalDateTime::compareTo).compare(this.time, other.time);
+        return Comparator.nullsFirst(LocalDateTime::compareTo).compare(this.time, other.time);
     }
 
     public Account sender() {

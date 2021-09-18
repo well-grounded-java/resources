@@ -5,18 +5,18 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class BadMapExamples {
     public static void main(String[] args) {
-        var map = new HashMap<String, Integer>();
-        var SIZE = 10_000;
+        var map = new HashMap<String, String>();
+        var SIZE = 1_000_000;
 
         Runnable r1 = () -> {
           for (int i = 0; i < SIZE; i = i + 1) {
-              map.put("t1" + i, 0);
+              map.put("t1" + i, "0");
           }
           System.out.println("Thread 1 done");
         };
         Runnable r2 = () -> {
             for (int i = 0; i < SIZE; i = i + 1) {
-                map.put("t2" + i, 0);
+                map.put("t2" + i, "0");
             }
             System.out.println("Thread 2 done");
         };
