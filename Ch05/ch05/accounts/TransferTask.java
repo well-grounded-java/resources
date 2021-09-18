@@ -22,4 +22,5 @@ public class TransferTask {
     public Account receiver() {
         return receiver;
     }
+
 }
