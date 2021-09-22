@@ -30,3 +30,6 @@ build/
 
 # Gradle local
 .gradle/
+
+# Maven
+target/
