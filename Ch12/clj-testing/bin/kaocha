@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+clj -M:kaocha -m kaocha.runner "$@"

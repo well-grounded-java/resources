@@ -30,3 +30,9 @@ build/
 
 # Gradle local
 .gradle/
+
+# Maven
+target/
+
+# Clojure
+.cpcache/
