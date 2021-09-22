@@ -33,3 +33,6 @@ build/
 
 # Maven
 target/
+
+# Clojure
+.cpcache/
