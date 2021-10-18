@@ -1,17 +1,15 @@
-package ch05;
-
-import java.util.concurrent.atomic.AtomicBoolean;
+package ch04;
 
 public class TaskManager implements Runnable {
-    private final AtomicBoolean shutdown = new AtomicBoolean(false);
+    private volatile boolean shutdown = false;
 
     public void shutdown() {
-        shutdown.set(true);
+        shutdown = true;
     }
 
     @Override
     public void run() {
-        while (!shutdown.get()) {
+        while (!shutdown) {
             // do some work - e.g. process a work unit
         }
     }

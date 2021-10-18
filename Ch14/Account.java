@@ -1,109 +1,97 @@
-package ch14;
-
-import java.util.concurrent.atomic.AtomicInteger;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
+package ch13;
 
 public class Account {
-    private static AtomicInteger nextAccountId = new AtomicInteger(1);
+    private final double atmFeePercent = 0.01;
 
-    private final int accountId;
     private double balance;
-    private final Lock lock = new ReentrantLock();
 
     public Account(int openingBalance) {
         balance = openingBalance;
-        accountId = nextAccountId.getAndIncrement();
-        lock.newCondition();
     }
 
-    public boolean withdraw(final int amount) {
+    public boolean withdraw(int amount, boolean safe) {
+        if (safe) {
+            return safeWithdraw(amount);
+        } else {
+            return rawWithdraw(amount);
+        }
+    }
+
+    public void deposit(int amount, boolean safe) {
+        if (safe) {
+            safeDeposit(amount);
+        } else {
+            rawDeposit(amount);
+        }
+    }
+
+    public boolean rawWithdraw(int amount) {
         // Check to see amount > 0, throw if not
-        lock.lock();
-        try {
-            if (balance >= amount) {
-                balance = balance - amount;
-                return true;
-            }
-        } finally {
-            lock.unlock();
+        if (balance >= amount) {
+            balance = balance - amount;
+            return true;
         }
         return false;
     }
 
-    public void deposit(final int amount) {
+    public void rawDeposit(int amount) {
         // Check to see amount > 0, throw if not
-        lock.lock();
-        try {
+        balance = balance + amount;
+    }
+
+    public double getRawBalance() {
+        return balance;
+    }
+
+    public boolean safeWithdraw(final int amount) {
+        // Check to see amount > 0, throw if not
+        synchronized (this) {
+            if (balance >= amount) {
+                balance = balance - amount;
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean safeWithdraw(final int amount, final boolean withFee) {
+        // Check to see amount > 0, throw if not
+        synchronized (this) {
+            if (balance >= amount) {
+                balance = balance - amount;
+                if (withFee) {
+                    balance = balance - amount * atmFeePercent;
+                }
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void safeDeposit(final int amount) {
+        // Check to see amount > 0, throw if not
+        synchronized (this) {
             balance = balance + amount;
-        } finally {
-            lock.unlock();
         }
     }
 
-    public boolean transferTo(final Account other, final int amount) {
-        // Check to see amount > 0, throw if not
-        if (accountId == other.getAccountId()) {
-            // Can't transfer to your own account
-            return false;
-        }
-
-        if (accountId < other.getAccountId()) {
-            lock.lock();
-            try {
-                if (balance >= amount) {
-                    balance = balance - amount;
-                    other.lock.lock();
-                    try {
-                        other.deposit(amount);
-                    } finally {
-                        other.lock.unlock();
-                    }
-                    return true;
-                }
-            } finally {
-                lock.unlock();
-            }
-            return false;
-        } else {
-            other.lock.lock();
-            try {
-                lock.lock();
-                try {
-                    if (balance >= amount) {
-                        balance = balance - amount;
-                        other.deposit(amount);
-                        return true;
-                    }
-                } finally {
-                    lock.unlock();
-                }
-            } finally {
-                other.lock.unlock();
-            }
-            return false;
-        }
-    }
-
-    public double getBalance() {
-        lock.lock();
-        try {
+    public double getSafeBalance() {
+        synchronized (this) {
             return balance;
-        } finally {
-            lock.unlock();
         }
     }
 
-    public int getAccountId() {
-        return accountId;
-    }
-
-    @Override
-    public String toString() {
-        return "Account{" +
-                "accountId=" + accountId +
-                ", balance=" + balance +
-                ", lock=" + lock +
-                '}';
+    public boolean naiveSafeTransferTo(final Account other, final int amount) {
+        // Check to see amount > 0, throw if not
+        synchronized (this) {
+            if (balance >= amount) {
+                balance = balance - amount;
+                synchronized (other) {
+                    other.rawDeposit(amount);
+                }
+                return true;
+            }
+        }
+        return false;
     }
 }
