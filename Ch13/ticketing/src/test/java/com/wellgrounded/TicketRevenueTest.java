@@ -1,23 +1,26 @@
 package com.wellgrounded;
 
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
 import java.math.BigDecimal;
 
-import static junit.framework.Assert.*;
-import org.junit.Before;
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class TicketRevenueTest {
     private TicketRevenue venueRevenue;
     private BigDecimal expectedRevenue;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         venueRevenue = new TicketRevenue();
     }
 
-    @Test(expected=IllegalArgumentException.class)
+    @Test
     public void failIfLessThanZeroTicketsAreSold() {
-        venueRevenue.estimateTotalRevenue(-1);
+        assertThrows(IllegalArgumentException.class,
+                     () -> venueRevenue.estimateTotalRevenue(-1));
     }
 
     @Test
@@ -37,8 +40,9 @@ public class TicketRevenueTest {
         assertEquals(expectedRevenue, venueRevenue.estimateTotalRevenue(10));
     }
 
-    @Test(expected=IllegalArgumentException.class)
+    @Test
     public void failIfMoreThanOneHundredTicketsAreSold() {
-        venueRevenue.estimateTotalRevenue(101);
+        assertThrows(IllegalArgumentException.class,
+                () -> venueRevenue.estimateTotalRevenue(101));
     }
 }
