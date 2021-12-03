@@ -1,9 +1,10 @@
 package com.wellgrounded;
 
-import static org.junit.Assert.assertNotNull;
+import org.junit.jupiter.api.Test;
+
 import java.util.List;
-import org.junit.Test;
-//import org.hamcrest.text.*;
+
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class MainTest {
   @Test
