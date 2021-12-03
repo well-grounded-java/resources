@@ -20,8 +20,12 @@ repositories {
 }
 
 dependencies {
-  testImplementation("junit:junit:4.13.2")
-  testImplementation("org.hamcrest:hamcrest-core:2.2")
+  testImplementation("org.junit.jupiter:junit-jupiter-api:5.8.1")
+  testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.8.1")
+}
+
+tasks.named<Test>("test") {
+  useJUnitPlatform()
 }
 
 tasks.withType<com.github.spotbugs.snom.SpotBugsTask>().configureEach {
