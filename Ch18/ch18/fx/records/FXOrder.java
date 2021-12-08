@@ -1,7 +1,7 @@
 package ch18.fx.records;
 
-import ch17.fx.CurrencyPair;
-import ch17.fx.Side;
+import ch18.fx.CurrencyPair;
+import ch18.fx.Side;
 
 import java.time.LocalDateTime;
 
