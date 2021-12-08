@@ -1,4 +1,4 @@
-package ch15;
+package ch05;
 
 import java.time.LocalDate;
 import java.util.Comparator;
@@ -14,9 +14,21 @@ public final class Deposit implements Comparable<Deposit> {
         this.payee = payee;
     }
 
+//    @Override
+//    public int compareTo(Deposit other) {
+//        return Comparator.nullsFirst(LocalDate::compareTo).compare(this.date, other.date);
+//    }
+
     @Override
     public int compareTo(Deposit other) {
-        return Comparator.nullsFirst(LocalDate::compareTo).compare(this.date, other.date);
+        if (other == null) {
+            throw new IllegalArgumentException("Cannot compare to null");
+        }
+        if (this.date == null || other.date == null) {
+            throw new IllegalArgumentException("Cannot compare to null date: "+ this +" ; "+ other);
+        }
+
+        return this.date.compareTo(other.date);
     }
 
     public static Deposit of(double amount, LocalDate date, Account payee) {
