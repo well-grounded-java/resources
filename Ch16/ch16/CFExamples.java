@@ -1,8 +1,7 @@
-package ch14;
+package ch16;
 
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
-import java.util.Arrays;
 
 public class CFExamples {
     public static void main(String[] args) {

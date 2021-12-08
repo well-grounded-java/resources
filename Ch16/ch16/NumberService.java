@@ -1,4 +1,4 @@
-package ch14;
+package ch16;
 
 import java.util.concurrent.ForkJoinPool;
 import java.util.stream.Stream;
