@@ -1,11 +1,9 @@
-package ch13;
+package ch15;
 
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.concurrent.Callable;
 import java.util.function.Function;
-import java.util.function.Supplier;
 
 public class Ch13Examples {
 
