@@ -33,9 +33,9 @@ Maven and Gradle projects should be ready to build `mvn compile` or
 `./gradlew build`. Individual example README files will contain more precise
 instructions for running from the command-line, as the details vary per project.
 
-Examples with loose code files are intended to load in an IDE at the `Ch*`
-level. You may need to set the SDK version for the project. Individual example
-README files contain any additional requirements for a given project.
+Examples with loose code files may be either compiled individually or loaded
+in an IDE. See the example README files for more precise instructions for each
+case. You may need to set the SDK version for the project.
 
 :warning: We don't recommend loading this entire project from the root.
 The mixture of builds, JDK versions and loose files doesn't tend to work well
