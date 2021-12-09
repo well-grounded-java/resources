@@ -47,10 +47,14 @@ java --module-path out \
 
 ## `wgjd.multi-version`
 
-This example demonstrates building a multi-release JAR file from scratch. It may
-be built using Java 11 but the resulting JAR may be used on Java 8 as well.
+This example demonstrates building a multi-release JAR file from scratch. It is
+simplest to use via the command-line. It may be built using Java 11 but the
+resulting JAR may be used on Java 8 as well.
 
 ```
+# Expects to build within the following directory
+cd Ch02/wgjd.multi-version
+
 # Compile the classes for use with Java 8
 javac --release 8 -sourcepath src/main/java/ -d out src/main/java/wgjd2ed/*.java
 
@@ -62,4 +66,22 @@ jar --create --file pid.jar --main-class=wgjd2ed.Main -C out/ . --release 11 -C 
 
 # Runs on either Java 8 or 11, indicates when run on Java 8 that it's doing so
 java -cp pid.jar wgjd2ed.Main
+```
+
+## `wgjd.sitecheck`
+
+This example creates a modular app from our Java 11+ HttpClient site checker in
+chapter 1. This sample should be built on Java 11+.
+
+```
+# Expects to run from Ch02
+cd Ch02
+
+# Compile the example
+javac -d out wgjd.sitecheck/module-info.java \
+  wgjd.sitecheck/wgjd/sitecheck/*.java \
+  wgjd.sitecheck/wgjd/sitecheck/*/*.java
+
+# Run the example
+java -cp out wgjd.sitecheck.SiteCheck http://github.com/well-grounded-java
 ```
