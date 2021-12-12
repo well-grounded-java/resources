@@ -9,8 +9,6 @@ public class Dictionary implements Map<String, String> {
     @Override
     public int size() {
         Collections.synchronizedMap(this);
-
-
         return size;
     }
 
