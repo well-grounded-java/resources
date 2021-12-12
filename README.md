@@ -5,7 +5,7 @@ Repository for The Well-Grounded Java Developer, 2nd Edition  project resources
 
 * [Ch01](https://github.com/well-grounded-java/resources/tree/main/Ch01) - Introducing modern Java
 * [Ch02](https://github.com/well-grounded-java/resources/tree/main/Ch02) - Java modules
-* [Ch02](https://github.com/well-grounded-java/resources/tree/main/Ch03) - Java 17
+* [Ch03](https://github.com/well-grounded-java/resources/tree/main/Ch03) - Java 17
 * [Ch04](https://github.com/well-grounded-java/resources/tree/main/Ch04) - Class files and bytecode
 * [Ch05](https://github.com/well-grounded-java/resources/tree/main/Ch05) - Java concurrency fundamentals
 * [Ch06](https://github.com/well-grounded-java/resources/tree/main/Ch06) - JDK concurrency libraries
