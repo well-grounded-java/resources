@@ -1,9 +1,9 @@
 <project>
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.wellgrounded</groupId>
-  <artifactId>example</artifactId>
+  <artifactId>maven-junit-4</artifactId>
   <version>1.0-SNAPSHOT</version>
-  <name>example</name>
+  <name>maven-junit-4</name>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
