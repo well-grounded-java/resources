@@ -8,10 +8,6 @@ application {
   mainModule.set("com.wellgrounded.nonapp")
 }
 
-//java {
-    //modularity.inferModulePath.set(true)
-//}
-
 tasks.jar {
   manifest {
     attributes("Main-Class" to application.mainClassName)
@@ -32,5 +28,5 @@ sourceSets {
 }
 
 dependencies {
-  implementation("com.wellgrounded:modlib:1.1")
+  implementation(files("../mod-lib/build/libs/gradle-mod-lib.jar"))
 }
