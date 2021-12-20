@@ -22,6 +22,6 @@ follows:
 ```
 cd Ch15/ch15
 javac *.java
-java -cp .. ch15.
+java -cp .. ch15.Ch15Examples
 ```
 
