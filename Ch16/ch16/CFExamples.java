@@ -17,7 +17,6 @@ public class CFExamples {
                     System.out.println("Starting up on thread: "+ Thread.currentThread().getName());
                     return NumberService.findPrime(n);
                 });
-//        future.
     }
 
     void run() {
@@ -42,5 +41,4 @@ public class CFExamples {
             e.printStackTrace();
         }
     }
-
 }
