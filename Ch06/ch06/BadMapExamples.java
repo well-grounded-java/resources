@@ -1,7 +1,6 @@
 package ch06;
 
 import java.util.HashMap;
-import java.util.concurrent.ConcurrentHashMap;
 
 public class BadMapExamples {
     public static void main(String[] args) {

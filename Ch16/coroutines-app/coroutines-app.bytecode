@@ -1,0 +1,152 @@
+Compiled from "Main.kt"
+final class com.wgjd.MainKt$main$1 extends kotlin.coroutines.jvm.internal.SuspendLambda implements kotlin.jvm.functions.Function2<kotlinx.coroutines.CoroutineScope, kotlin.coroutines.Continuation<? super kotlin.Unit>, java.lang.Object> {
+  java.lang.Object L$0;
+
+  int label;
+
+  public final java.lang.Object invokeSuspend(java.lang.Object);
+    Code:
+       0: invokestatic  #36                 // Method kotlin/coroutines/intrinsics/IntrinsicsKt.getCOROUTINE_SUSPENDED:()Ljava/lang/Object;
+       3: astore_3
+       4: aload_0
+       5: getfield      #40                 // Field label:I
+       8: tableswitch   { // 0 to 2
+                     0: 36
+                     1: 69
+                     2: 104
+               default: 122
+          }
+      36: aload_1
+      37: invokestatic  #46                 // Method kotlin/ResultKt.throwOnFailure:(Ljava/lang/Object;)V
+      40: aload_0
+      41: getfield      #48                 // Field p$:Lkotlinx/coroutines/CoroutineScope;
+      44: astore_2
+      45: ldc2_w        #49                 // long 1000l
+      48: aload_0
+      49: aload_0
+      50: aload_2
+      51: putfield      #52                 // Field L$0:Ljava/lang/Object;
+      54: aload_0
+      55: iconst_1
+      56: putfield      #40                 // Field label:I
+      59: invokestatic  #58                 // Method kotlinx/coroutines/DelayKt.delay:(JLkotlin/coroutines/Continuation;)Ljava/lang/Object;
+      62: dup
+      63: aload_3
+      64: if_acmpne     82
+      67: aload_3
+      68: areturn
+      69: aload_0
+      70: getfield      #52                 // Field L$0:Ljava/lang/Object;
+      73: checkcast     #60                 // class kotlinx/coroutines/CoroutineScope
+      76: astore_2
+      77: aload_1
+      78: invokestatic  #46                 // Method kotlin/ResultKt.throwOnFailure:(Ljava/lang/Object;)V
+      81: aload_1
+      82: pop
+      83: aload_0
+      84: aload_0
+      85: aload_2
+      86: putfield      #52                 // Field L$0:Ljava/lang/Object;
+      89: aload_0
+      90: iconst_2
+      91: putfield      #40                 // Field label:I
+      94: invokestatic  #66                 // Method com/wgjd/MainKt.sus:(Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+      97: dup
+      98: aload_3
+      99: if_acmpne     117
+     102: aload_3
+     103: areturn
+     104: aload_0
+     105: getfield      #52                 // Field L$0:Ljava/lang/Object;
+     108: checkcast     #60                 // class kotlinx/coroutines/CoroutineScope
+     111: astore_2
+     112: aload_1
+     113: invokestatic  #46                 // Method kotlin/ResultKt.throwOnFailure:(Ljava/lang/Object;)V
+     116: aload_1
+     117: pop
+     118: getstatic     #72                 // Field kotlin/Unit.INSTANCE:Lkotlin/Unit;
+     121: areturn
+     122: new           #74                 // class java/lang/IllegalStateException
+     125: dup
+     126: ldc           #76                 // String call to \'resume\' before \'invoke\' with coroutine
+     128: invokespecial #80                 // Method java/lang/IllegalStateException."<init>":(Ljava/lang/String;)V
+     131: athrow
+
+  com.wgjd.MainKt$main$1(kotlin.coroutines.Continuation);
+    Code:
+       0: aload_0
+       1: iconst_2
+       2: aload_1
+       3: invokespecial #89                 // Method kotlin/coroutines/jvm/internal/SuspendLambda."<init>":(ILkotlin/coroutines/Continuation;)V
+       6: return
+
+  public final kotlin.coroutines.Continuation<kotlin.Unit> create(java.lang.Object, kotlin.coroutines.Continuation<?>);
+    Code:
+       0: aload_2
+       1: ldc           #94                 // String completion
+       3: invokestatic  #100                // Method kotlin/jvm/internal/Intrinsics.checkNotNullParameter:(Ljava/lang/Object;Ljava/lang/String;)V
+       6: new           #2                  // class com/wgjd/MainKt$main$1
+       9: dup
+      10: aload_2
+      11: invokespecial #102                // Method "<init>":(Lkotlin/coroutines/Continuation;)V
+      14: astore_3
+      15: aload_1
+      16: checkcast     #60                 // class kotlinx/coroutines/CoroutineScope
+      19: aload_3
+      20: aload_1
+      21: checkcast     #60                 // class kotlinx/coroutines/CoroutineScope
+      24: putfield      #48                 // Field p$:Lkotlinx/coroutines/CoroutineScope;
+      27: aload_3
+      28: areturn
+
+  public final java.lang.Object invoke(java.lang.Object, java.lang.Object);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: aload_2
+       3: checkcast     #109                // class kotlin/coroutines/Continuation
+       6: invokevirtual #111                // Method create:(Ljava/lang/Object;Lkotlin/coroutines/Continuation;)Lkotlin/coroutines/Continuation;
+       9: checkcast     #2                  // class com/wgjd/MainKt$main$1
+      12: getstatic     #72                 // Field kotlin/Unit.INSTANCE:Lkotlin/Unit;
+      15: invokevirtual #113                // Method invokeSuspend:(Ljava/lang/Object;)Ljava/lang/Object;
+      18: areturn
+}
+
+Compiled from "Main.kt"
+public final class com.wgjd.MainKt {
+  public static final java.lang.Object sus(kotlin.coroutines.Continuation<? super kotlin.Unit>);
+    Code:
+       0: ldc           #11                 // String Totally sus...
+       2: astore_1
+       3: iconst_0
+       4: istore_2
+       5: getstatic     #17                 // Field java/lang/System.out:Ljava/io/PrintStream;
+       8: aload_1
+       9: invokevirtual #23                 // Method java/io/PrintStream.println:(Ljava/lang/Object;)V
+      12: getstatic     #29                 // Field kotlin/Unit.INSTANCE:Lkotlin/Unit;
+      15: areturn
+
+  public static final void main();
+    Code:
+       0: getstatic     #41                 // Field kotlinx/coroutines/GlobalScope.INSTANCE:Lkotlinx/coroutines/GlobalScope;
+       3: checkcast     #43                 // class kotlinx/coroutines/CoroutineScope
+       6: aconst_null
+       7: aconst_null
+       8: new           #45                 // class com/wgjd/MainKt$main$1
+      11: dup
+      12: aconst_null
+      13: invokespecial #49                 // Method com/wgjd/MainKt$main$1."<init>":(Lkotlin/coroutines/Continuation;)V
+      16: checkcast     #51                 // class kotlin/jvm/functions/Function2
+      19: iconst_3
+      20: aconst_null
+      21: invokestatic  #57                 // Method kotlinx/coroutines/BuildersKt.launch$default:(Lkotlinx/coroutines/CoroutineScope;Lkotlin/coroutines/CoroutineContext;Lkotlinx/coroutines/CoroutineStart;Lkotlin/jvm/functions/Function2;ILjava/lang/Object;)Lkotlinx/coroutines/Job;
+      24: pop
+      25: ldc2_w        #58                 // long 2000l
+      28: invokestatic  #65                 // Method java/lang/Thread.sleep:(J)V
+      31: return
+
+  public static void main(java.lang.String[]);
+    Code:
+       0: invokestatic  #36                 // Method main:()V
+       3: return
+}

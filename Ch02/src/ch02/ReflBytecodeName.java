@@ -1,6 +1,5 @@
 package ch02;
 
-//import sun.invoke.util.BytecodeName;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 
