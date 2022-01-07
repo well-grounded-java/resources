@@ -29,7 +29,7 @@ tasks.withType<JavaCompile> {
 
 tasks.jar {
   manifest {
-    attributes("Main-Class" to application.mainClassName)
+    attributes("Main-Class" to application.mainClass)
   }
 }
 
