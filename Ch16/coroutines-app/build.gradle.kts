@@ -7,12 +7,12 @@ plugins {
 }
 
 application {
-  mainClassName = "com.wellgrounded.kotlin.MainKt"
+  mainClass.set("com.wellgrounded.kotlin.MainKt")
 }
 
 tasks.jar {
   manifest {
-    attributes("Main-Class" to application.mainClassName)
+    attributes("Main-Class" to application.mainClass)
   }
 }
 
