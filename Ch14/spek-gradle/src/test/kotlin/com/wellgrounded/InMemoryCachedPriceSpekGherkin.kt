@@ -28,9 +28,6 @@ object InMemoryCachedPriceSpekGherkin : Spek({
         }
 
         Scenario("cached value") {
-            lateinit var cachedPrice : Price
-            lateinit var result : BigDecimal
-
             Given("a cached price") {
                 cachedPrice = InMemoryCachedPrice(stubbedPrice, BigDecimal(20))
             }
