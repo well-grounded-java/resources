@@ -1,7 +1,7 @@
 plugins {
   application
   java
-  kotlin("jvm") version "1.5.21"
+  kotlin("jvm") version "1.6.10"
 }
 
 application {

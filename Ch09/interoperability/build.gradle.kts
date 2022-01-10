@@ -2,7 +2,7 @@ group = "com.wellgrounded"
 version = "0.1.0"
 
 plugins {
-  kotlin("jvm") version "1.4.10"
+  kotlin("jvm") version "1.6.10"
   application
 }
 
@@ -14,6 +14,12 @@ tasks.jar {
   manifest {
     attributes("Main-Class" to application.mainClass)
   }
+}
+
+tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
+    kotlinOptions {
+        jvmTarget = "11"
+    }
 }
 
 repositories {
