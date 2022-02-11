@@ -1,0 +1,16 @@
+.git
+.DS_Store
+.idea/
+*.iml
+*.class
+
+# Ignore guides and HOWTOs folder
+guides/
+
+# Ignore build folders
+out/
+build/
+target/
+.gradle/
+
+Dockerfile
