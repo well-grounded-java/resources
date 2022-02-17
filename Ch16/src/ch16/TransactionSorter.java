@@ -26,6 +26,13 @@ public class TransactionSorter extends RecursiveAction {
         result = new Transaction[this.transactions.length];
     }
 
+    /**
+     * This method implements a simple form of Mergesort. Please consult a
+     * suitable textbook if you are interested in the implementation details.
+     *
+     * @param left
+     * @param right
+     */
     private void merge(TransactionSorter left, TransactionSorter right) {
         int i = 0;
         int lCount = 0;
