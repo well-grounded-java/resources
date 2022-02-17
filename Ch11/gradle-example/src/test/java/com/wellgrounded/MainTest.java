@@ -11,7 +11,8 @@ public class MainTest {
     assertNotNull(Main.getMessage());
   }
 
-  public boolean equals(Object anObject) {
-    return true;
-  }
+  // Uncomment to cause a SpotBugs failure
+  //public boolean equals(Object anObject) {
+    //return true;
+  //}
 }

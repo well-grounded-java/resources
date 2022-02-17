@@ -1,16 +1,16 @@
 plugins {
   application
   java
-  kotlin("jvm") version "1.5.21"
+  kotlin("jvm") version "1.6.10"
 }
 
 application {
-  mainClassName = "com.wellgrounded.Main"
+  mainClass.set("com.wellgrounded.Main")
 }
 
 tasks.jar {
   manifest {
-    attributes("Main-Class" to application.mainClassName)
+    attributes("Main-Class" to application.mainClass)
   }
 }
 

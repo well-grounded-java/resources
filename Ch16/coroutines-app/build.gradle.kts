@@ -2,17 +2,17 @@ group = "com.wellgrounded"
 version = "0.1.0"
 
 plugins {
-  kotlin("jvm") version "1.4.10"
+  kotlin("jvm") version "1.6.10"
   application
 }
 
 application {
-  mainClassName = "com.wellgrounded.kotlin.MainKt"
+  mainClass.set("com.wellgrounded.kotlin.MainKt")
 }
 
 tasks.jar {
   manifest {
-    attributes("Main-Class" to application.mainClassName)
+    attributes("Main-Class" to application.mainClass)
   }
 }
 
@@ -23,5 +23,5 @@ repositories {
 
 dependencies {
   implementation(kotlin("stdlib"))
-  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.9")
+  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0")
 }

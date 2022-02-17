@@ -2,27 +2,27 @@ group = "com.wellgrounded"
 version = "0.1.0"
 
 plugins {
-  kotlin("jvm") version "1.4.10"
+  kotlin("jvm") version "1.6.10"
   application
 }
 
 application {
-  mainClassName = "com.wellgrounded.kotlin.MainKt"
+  mainClass.set("com.wellgrounded.kotlin.MainKt")
 }
 
 task("runCancel", JavaExec::class) {
-    main = "com.wellgrounded.kotlin.CancellingMainKt"
+    mainClass.set("com.wellgrounded.kotlin.CancellingMainKt")
     classpath = sourceSets["main"].runtimeClasspath
 }
 
 task("runCoop", JavaExec::class) {
-    main = "com.wellgrounded.kotlin.CoopMainKt"
+    mainClass.set("com.wellgrounded.kotlin.CoopMainKt")
     classpath = sourceSets["main"].runtimeClasspath
 }
 
 tasks.jar {
   manifest {
-    attributes("Main-Class" to application.mainClassName)
+    attributes("Main-Class" to application.mainClass)
   }
 }
 
