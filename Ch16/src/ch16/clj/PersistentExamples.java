@@ -59,8 +59,8 @@ public class PersistentExamples {
         }
         System.out.println(Arrays.toString(vector.tail));
         System.out.println(Arrays.toString(vector.root.array));
-        var fullTail = (PersistentVector.Node)(vector.root.array[0]);
-        System.out.println("Full Tail: "+ Arrays.toString(fullTail.array));
+        var earlier = (PersistentVector.Node)(vector.root.array[0]);
+        System.out.println("Earlier: "+ Arrays.toString(earlier.array));
 //        for (int i=64; i < 96; i = i + 1) {
 //            vector = vector.cons(i);
 //        }
