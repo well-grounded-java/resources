@@ -8,7 +8,7 @@ public class FSOAccount {
         balance = openingBalance;
     }
 
-    public synchronized boolean withdraw(final int amount) {
+    public synchronized boolean withdraw(int amount) {
         // Check to see amount > 0, throw if not
         if (balance >= amount) {
             balance = balance - amount;
@@ -18,7 +18,7 @@ public class FSOAccount {
         return false;
     }
 
-    public synchronized void deposit(final int amount) {
+    public synchronized void deposit(int amount) {
             // Check to see amount > 0, throw if not
             balance = balance + amount;
     }
@@ -27,7 +27,7 @@ public class FSOAccount {
         return balance;
     }
 
-    public synchronized boolean transferTo(final FSOAccount other, final int amount) {
+    public synchronized boolean transferTo(FSOAccount other, int amount) {
         // Check to see amount > 0, throw if not
         // Simulate some other checks that need to occur
         try {

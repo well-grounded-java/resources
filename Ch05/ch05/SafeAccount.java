@@ -17,7 +17,7 @@ public class SafeAccount {
         return result;
     }
 
-    public boolean withdraw(final int amount) {
+    public boolean withdraw(int amount) {
         // Check to see amount > 0, throw if not
         synchronized (this) {
             if (balance >= amount) {
@@ -28,14 +28,14 @@ public class SafeAccount {
         return false;
     }
 
-    public void deposit(final int amount) {
+    public void deposit(int amount) {
         // Check to see amount > 0, throw if not
         synchronized (this) {
             balance = balance + amount;
         }
     }
 
-    public boolean transferTo(final SafeAccount other, final int amount) {
+    public boolean transferTo(SafeAccount other, int amount) {
         // Check to see amount > 0, throw if not
 
         if (accountId == other.getAccountId()) {

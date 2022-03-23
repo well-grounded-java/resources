@@ -39,8 +39,8 @@ public class PanamaExamples {
                 System.exit(2);
             }
 
-            final String colorTypeMsg;
-            final byte colorType = spng_ihdr.color_type$get(ihdr);
+            String colorTypeMsg;
+            byte colorType = spng_ihdr.color_type$get(ihdr);
 
             if (colorType == SPNG_COLOR_TYPE_GRAYSCALE()) {
                 colorTypeMsg = "grayscale";

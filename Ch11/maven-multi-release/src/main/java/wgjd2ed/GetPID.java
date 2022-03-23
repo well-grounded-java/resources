@@ -15,8 +15,8 @@ public class GetPID {
         // represents the currently running JVM. On Sun and Oracle JVMs, this
         // name is in the format <pid>@<hostname>.
 
-        final String jvmName = ManagementFactory.getRuntimeMXBean().getName();
-        final int index = jvmName.indexOf('@');
+        String jvmName = ManagementFactory.getRuntimeMXBean().getName();
+        int index = jvmName.indexOf('@');
         if (index < 1)
             return 0;
 

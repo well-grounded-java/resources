@@ -35,7 +35,7 @@ public class SynchronizedAccount implements ch17.Account {
     }
 
     @Override
-    public boolean transferTo(final Account other, final int amount) {
+    public boolean transferTo(Account other, int amount) {
         // Check to see amount > 0, throw if not
         synchronized (this) {
             if (balance >= amount) {

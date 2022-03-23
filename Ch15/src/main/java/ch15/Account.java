@@ -43,7 +43,7 @@ public class Account {
         return balance;
     }
 
-    public boolean safeWithdraw(final int amount) {
+    public boolean safeWithdraw(int amount) {
         // Check to see amount > 0, throw if not
         synchronized (this) {
             if (balance >= amount) {
@@ -54,7 +54,7 @@ public class Account {
         return false;
     }
 
-    public boolean safeWithdraw(final int amount, final boolean withFee) {
+    public boolean safeWithdraw(int amount, boolean withFee) {
         // Check to see amount > 0, throw if not
         synchronized (this) {
             if (balance >= amount) {
@@ -68,7 +68,7 @@ public class Account {
         return false;
     }
 
-    public void safeDeposit(final int amount) {
+    public void safeDeposit(int amount) {
         // Check to see amount > 0, throw if not
         synchronized (this) {
             balance = balance + amount;
@@ -81,7 +81,7 @@ public class Account {
         }
     }
 
-    public boolean naiveSafeTransferTo(final Account other, final int amount) {
+    public boolean naiveSafeTransferTo(Account other, int amount) {
         // Check to see amount > 0, throw if not
         synchronized (this) {
             if (balance >= amount) {

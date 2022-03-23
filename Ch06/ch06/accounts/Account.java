@@ -17,7 +17,7 @@ public class Account {
         lock.newCondition();
     }
 
-    public boolean withdraw(final int amount) {
+    public boolean withdraw(int amount) {
         // Check to see amount > 0, throw if not
         lock.lock();
         try {
@@ -31,7 +31,7 @@ public class Account {
         return false;
     }
 
-    public void deposit(final int amount) {
+    public void deposit(int amount) {
         // Check to see amount > 0, throw if not
         lock.lock();
         try {
@@ -41,7 +41,7 @@ public class Account {
         }
     }
 
-    public boolean transferTo(final Account other, final int amount) {
+    public boolean transferTo(Account other, int amount) {
         // Check to see amount > 0, throw if not
         if (accountId == other.getAccountId()) {
             // Can't transfer to your own account

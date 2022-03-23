@@ -16,11 +16,11 @@ public class Discovery {
     var output = new PlainAttachOutput();
 
     try {
-      final var vmConsumer = new VMIntrospector();
+      var vmConsumer = new VMIntrospector();
       System.out.println("Java processes:");
       System.out.println("PID\tDisplay Name\tVM Version\tAttachable");
 
-      final List<VirtualMachineDescriptor> vmds = VirtualMachine.list();
+      List<VirtualMachineDescriptor> vmds = VirtualMachine.list();
       for (var vmd : vmds) {
         if (!skip(vmd)) {
           vmConsumer.accept(vmd);
@@ -32,7 +32,7 @@ public class Discovery {
   }
 
   private static boolean skip(VirtualMachineDescriptor vmd) {
-    final var displayName = vmd.displayName();
+    var displayName = vmd.displayName();
     for (var term : PROCESS_SKIP_TERMS) {
       if (displayName.contains(term)) {
         return true;
