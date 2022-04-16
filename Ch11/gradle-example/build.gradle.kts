@@ -1,6 +1,5 @@
 plugins {
   application
-  java
   id("org.jetbrains.kotlin.jvm") version "1.4.31"
   id("com.github.spotbugs") version "4.3.0"
 }
