@@ -1,9 +1,8 @@
 ## Building
 
-To build the images follow these steps:
+To build the image follow these steps:
 
 ```
-./gradlew installDist
 docker build -t docker-gradle .
 ```
 
