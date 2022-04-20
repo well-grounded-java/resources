@@ -4,12 +4,12 @@ FROM eclipse-temurin:17-jdk AS build
 RUN mkdir /project
 WORKDIR /project
 
-ADD ./gradle ./gradle
-ADD ./gradlew* ./settings.gradle* .
+COPY ./gradle ./gradle
+COPY ./gradlew* ./settings.gradle* .
 RUN ./gradlew
 
 # Copy everything into container
-ADD . .
+COPY . .
 
 # Build as before
 RUN ./gradlew clean installDist
