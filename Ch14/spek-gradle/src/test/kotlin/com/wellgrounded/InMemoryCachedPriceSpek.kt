@@ -3,6 +3,7 @@ package com.wellgrounded
 import org.spekframework.spek2.Spek
 
 import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertTrue
 import java.math.BigDecimal
 
 object InMemoryCachedPriceSpek : Spek({
@@ -18,7 +19,7 @@ object InMemoryCachedPriceSpek : Spek({
         test("returns exact same object") {
             val first = cachedPrice.initialPrice
             val second = cachedPrice.initialPrice
-            assertEquals(true, first === second)
+            assertTrue(first === second)
         }
     }
 
