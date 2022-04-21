@@ -3,6 +3,7 @@ package com.wellgrounded
 import org.spekframework.spek2.Spek
 
 import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertTrue
 import org.spekframework.spek2.style.gherkin.Feature
 import java.math.BigDecimal
 
@@ -27,7 +28,7 @@ object InMemoryCachedPriceSpekGherkin : Spek({
             }
 
             Then("it sees same reference late") {
-                assertEquals(true, result === cachedPrice.initialPrice)
+                assertTrue(result === cachedPrice.initialPrice)
             }
         }
 
