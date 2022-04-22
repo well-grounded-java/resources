@@ -1,9 +1,8 @@
 package com.wellgrounded
 
+import org.junit.jupiter.api.Assertions.*
 import org.spekframework.spek2.Spek
 
-import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.Assertions.assertTrue
 import java.math.BigDecimal
 
 object InMemoryCachedPriceSpek : Spek({
@@ -20,6 +19,12 @@ object InMemoryCachedPriceSpek : Spek({
             val first = cachedPrice.initialPrice
             val second = cachedPrice.initialPrice
             assertTrue(first === second)
+        }
+
+        listOf(1, 2, 3).forEach {
+            test("testing $it") {
+                assertNotEquals(BigDecimal(it), cachedPrice.initialPrice)
+            }
         }
     }
 
