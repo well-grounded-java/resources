@@ -18,8 +18,8 @@ To compile and run them directly, you can do the following:
 ```
 cd Ch02/src/ch02
 javac *.java
-java -cp .. MyUnsafe
-java -cp .. ReflBytecodeName
+java -cp .. MyUnsafe.java
+java -cp .. ReflBytecodeName.java
 ```
 
 ## `wgjd.discovery`

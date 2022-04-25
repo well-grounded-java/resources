@@ -5,6 +5,7 @@ public class StringStack {
     private int current = 0;
 
     public boolean push(String s) {
+        // Exception handling elided
         if (current < values.length) {
             values[current] = s;
             current = current + 1;

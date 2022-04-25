@@ -27,6 +27,14 @@ public final class SiteCheck implements HTTPChecker {
     }
 
     public static void main(String[] args) {
+        // Switch on to see the PlatformClassLoader in action
+//        var clThis = SiteCheck.class.getClassLoader();
+//        System.out.println(clThis);
+//        var clObj = Object.class.getClassLoader();
+//        System.out.println(clObj);
+//        var clHttp = HttpClient.class.getClassLoader();
+//        System.out.println(clHttp);
+
         if (args.length < 1) {
             usage();
         }
