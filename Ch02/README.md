@@ -56,16 +56,16 @@ resulting JAR may be used on Java 8 as well.
 cd Ch02/wgjd.multi-version
 
 # Compile the classes for use with Java 8
-javac --release 8 -sourcepath src/main/java/ -d out src/main/java/wgjd2ed/*.java
+javac --release 8 -d out src/main/java/wgjd2ed/*.java
 
 # Compile the specialized classes for Java 11
-javac --release 11 -sourcepath versions/11 -d out-11 versions/11/wgjd2ed/GetPID.java
+javac --release 11 -d out-11 versions/11/java/wgjd2ed/GetPID.java
 
 # Create the JAR file with class files for both 8 and 11
 jar --create --file pid.jar --main-class=wgjd2ed.Main -C out/ . --release 11 -C out-11/ .
 
 # Runs on either Java 8 or 11, indicates when run on Java 8 that it's doing so
-java -cp pid.jar wgjd2ed.Main
+java -jar pid.jar
 ```
 
 ## `wgjd.sitecheck`
