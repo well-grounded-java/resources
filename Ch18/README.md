@@ -97,10 +97,10 @@ cd Ch18/Panama
 
 ./gradlew jar
 
-java -jar build/libs/Panama.jar \
+java -Djava.library.path=./libspng/cbuild \
    --add-modules=jdk.incubator.foreign \
    --enable-native-access=ALL-UNNAMED \
-   -Djava.library.path=./libspng/cbuild \
+    -jar build/libs/Panama.jar \
    ./libspng/tests/images/basi0g01.png
 ```
 
