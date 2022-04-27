@@ -6,3 +6,6 @@ build
 
 # Don't check in libspng clone
 libspng
+
+# Don't check in wrappers either
+src/main/java/org/*

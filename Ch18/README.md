@@ -23,11 +23,8 @@ java -cp .. ch18.SwitchExamples
 This is one of the more complex examples in the book given it's use of native
 libraries and the EA state of Panama.
 
-* `Panama/src/main/java/org/libspng` - Example Panama generated wrappers for native library `libspng`
-* `Panama/src/main/java/wgjd.png` - Our application using the generated wrappers for native library `libspng`
-
-The wrappers were generated with an EA Panama build of JDK 17 (build
-17-panama+3-167 (2022/1/18)) from https://jdk.java.net/panama/17/ and against
+This has been tested using an EA Panama build of JDK 17 (build
+17-panama+3-167 (2022/1/18)) from https://jdk.java.net/panama/17/ and
 0.7.2 of `libspng`
 
 ### `libspng` installation
@@ -69,14 +66,10 @@ https://github.com/randy408/libspng/blob/v0.7.2/docs/build.md:
 
 ### `jextract` generating wrappers
 
-Generating wrapper classes yourself isn't required to build and run the
-project if you're using 0.7.2 `libspng` as instructed above.
+To generate the wrapper classes, you'll need the Panama EA
+(https://jdk.java.net/panama/) to get access to the `jextract` tool.
 
-If you need a different version of just want to try doing it yourself, though,
-as of this writing you'll need the Panama EA (https://jdk.java.net/panama/) to
-get access to the `jextract` tool.
-
-To rerun the extraction where this project expects it, do the following:
+To run the extraction where this project expects it, do the following:
 
 ```
 cd Ch18/Panama/src/main/java
@@ -95,8 +88,7 @@ when you're using the Panama EA JDK version.
 
 ### Building and running the app
 
-If you aren't regenerating your wrappers, you should be able to build and run
-the application as checked in on JDK 17+, without needing the Panama EA.
+Building the project requires JDK 17+ (only `jextract` requires the Panama EA).
 
 From the `Ch18/Panama` project root:
 
