@@ -88,8 +88,6 @@ public class Main {
                     512,
                     512);
 
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
