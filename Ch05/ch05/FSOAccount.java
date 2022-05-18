@@ -1,5 +1,7 @@
 package ch05;
 
+import java.util.concurrent.locks.*;
+
 public class FSOAccount {
     private double balance;
 
@@ -30,10 +32,7 @@ public class FSOAccount {
     public synchronized boolean transferTo(final FSOAccount other, final int amount) {
         // Check to see amount > 0, throw if not
         // Simulate some other checks that need to occur
-        try {
-            Thread.sleep(10);
-        } catch (InterruptedException __) {
-        }
+        LockSupport.parkNanos(10_000_000);
         if (balance >= amount) {
             balance = balance - amount;
             other.deposit(amount);

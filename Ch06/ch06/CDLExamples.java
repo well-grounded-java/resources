@@ -2,6 +2,7 @@ package ch06;
 
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.locks.*;
 
 public class CDLExamples {
     public static class Counter implements Runnable {
@@ -17,27 +18,20 @@ public class CDLExamples {
 
         @Override
         public void run() {
-            try {
-                Thread.sleep(100);
-            } catch (InterruptedException __) {
-            }
+            LockSupport.parkNanos(100_000_000);
             count.addAndGet(value);
             latch.countDown();
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         var latch = new CountDownLatch(5);
         var count = new AtomicInteger();
         for (int i = 0; i < 5; i = i + 1) {
             var r  = new Counter(latch, i, count);
             new Thread(r).start();
         }
-        try {
-            latch.await();
-            System.out.println("Total: "+ count.get());
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        latch.await();
+        System.out.println("Total: "+ count.get());
     }
 }
