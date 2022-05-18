@@ -14,7 +14,6 @@ public class Account {
     public Account(int openingBalance) {
         balance = openingBalance;
         accountId = nextAccountId.getAndIncrement();
-        lock.newCondition();
     }
 
     public boolean withdraw(final int amount) {
@@ -48,40 +47,25 @@ public class Account {
             return false;
         }
 
-        if (accountId < other.getAccountId()) {
-            lock.lock();
+        var firstLock = accountId < other.getAccountId() ?
+                lock : other.lock;
+        var secondLock = firstLock == lock ? other.lock : lock;
+
+        firstLock.lock();
+        try {
+            secondLock.lock();
             try {
                 if (balance >= amount) {
                     balance = balance - amount;
-                    other.lock.lock();
-                    try {
-                        other.deposit(amount);
-                    } finally {
-                        other.lock.unlock();
-                    }
+                    other.deposit(amount);
                     return true;
                 }
+                return false;
             } finally {
-                lock.unlock();
+                secondLock.unlock();
             }
-            return false;
-        } else {
-            other.lock.lock();
-            try {
-                lock.lock();
-                try {
-                    if (balance >= amount) {
-                        balance = balance - amount;
-                        other.deposit(amount);
-                        return true;
-                    }
-                } finally {
-                    lock.unlock();
-                }
-            } finally {
-                other.lock.unlock();
-            }
-            return false;
+        } finally {
+            firstLock.unlock();
         }
     }
 
