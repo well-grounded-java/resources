@@ -1,10 +1,11 @@
 plugins {
   application
   java
+  id("com.github.johnrengelman.shadow") version "7.1.2"
 }
 
 application {
-//  mainClass.set("charts.Main")
+  mainClass.set("charts.Main")
 }
 
 tasks.jar {
