@@ -11,50 +11,41 @@ public class AccountManager {
 
     private final BlockingQueue<TransferTask> pending = new LinkedBlockingQueue<>();
     private final BlockingQueue<TransferTask> forDeposit = new LinkedBlockingQueue<>();
-    private final BlockingQueue<TransferTask> failed = new LinkedBlockingQueue<>();
+    private final BlockingQueue<TransferTask> failedInsufficientFunds = new LinkedBlockingQueue<>();
 
     private Thread withdrawals;
     private Thread deposits;
 
     public void init() {
         Runnable withdraw = () -> {
-            LOOP:
-            while (!shutdown) {
+            boolean interrupted = false;
+            while (!interrupted || !pending.isEmpty()) {
                 try {
-                    var task = pending.poll(5, TimeUnit.SECONDS);
-                    if (task == null) {
-                        continue LOOP;
-                    }
+                    var task = pending.take();
                     var sender = task.sender();
                     if (sender.withdraw(task.amount())) {
-                        forDeposit.put(task);
+                        forDeposit.add(task);
                     } else {
-                        failed.put(task);
+                        failedInsufficientFunds.add(task);
                     }
                 } catch (InterruptedException e) {
-                    // Log at high criticality and proceed to next item
+                    interrupted = true;
                 }
             }
-            // Drain pending queue to failed or log
+            deposits.interrupt();
         };
 
         Runnable deposit = () -> {
-            LOOP:
-            while (!shutdown) {
-                TransferTask task;
+            boolean interrupted = false;
+            while (!interrupted || !forDeposit.isEmpty()) {
                 try {
-                    task = forDeposit.poll(5, TimeUnit.SECONDS);
-                    if (task == null) {
-                        continue LOOP;
-                    }
+                    var task = forDeposit.take();
+                    var receiver = task.receiver();
+                    receiver.deposit(task.amount());
                 } catch (InterruptedException e) {
-                    // Log at high criticality and proceed to next item
-                    continue LOOP;
+                    interrupted = true;
                 }
-                var receiver = task.receiver();
-                receiver.deposit(task.amount());
             }
-            // Drain forDeposit queue to failed or log
         };
 
         init(withdraw, deposit);
@@ -74,33 +65,18 @@ public class AccountManager {
     }
 
     public boolean submit(TransferTask transfer) {
-        if (shutdown) {
-            return false;
-        }
-        try {
-            pending.put(transfer);
-        } catch (InterruptedException e) {
-            try {
-                failed.put(transfer);
-            } catch (InterruptedException x) {
-                // Log at high criticality
-                return false;
-            }
-        }
+        if (shutdown) return false;
+        pending.add(transfer);
         return true;
     }
 
-    public void await() {
-        try {
-            withdrawals.join();
-            deposits.join();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-            System.exit(1);
-        }
+    public void await() throws InterruptedException {
+        withdrawals.join();
+        deposits.join();
     }
 
     public void shutdown() {
         shutdown = true;
+        withdrawals.interrupt();
     }
 }

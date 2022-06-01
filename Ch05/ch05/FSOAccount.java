@@ -32,7 +32,8 @@ public class FSOAccount {
         // Simulate some other checks that need to occur
         try {
             Thread.sleep(10);
-        } catch (InterruptedException __) {
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
         }
         if (balance >= amount) {
             balance = balance - amount;

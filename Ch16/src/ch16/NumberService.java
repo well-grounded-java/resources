@@ -1,14 +1,14 @@
 package ch16;
 
-import java.util.concurrent.ForkJoinPool;
-import java.util.stream.Stream;
+import java.util.concurrent.*;
+import java.util.stream.*;
 
 public class NumberService {
     public static long findPrime(int n) {
         try {
             Thread.sleep(5_000);
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            throw new CancellationException("interrupted");
         }
         return 42L;
     }
