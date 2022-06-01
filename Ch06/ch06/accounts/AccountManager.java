@@ -3,7 +3,6 @@ package ch06.accounts;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.LinkedBlockingQueue;
-import java.util.concurrent.TimeUnit;
 
 public class AccountManager {
     private final ConcurrentHashMap<Integer, Account> accounts = new ConcurrentHashMap<>();
@@ -11,7 +10,7 @@ public class AccountManager {
 
     private final BlockingQueue<TransferTask> pending = new LinkedBlockingQueue<>();
     private final BlockingQueue<TransferTask> forDeposit = new LinkedBlockingQueue<>();
-    private final BlockingQueue<TransferTask> failedInsufficientFunds = new LinkedBlockingQueue<>();
+    private final BlockingQueue<TransferTask> failed = new LinkedBlockingQueue<>();
 
     private Thread withdrawals;
     private Thread deposits;
@@ -26,7 +25,7 @@ public class AccountManager {
                     if (sender.withdraw(task.amount())) {
                         forDeposit.add(task);
                     } else {
-                        failedInsufficientFunds.add(task);
+                        failed.add(task);
                     }
                 } catch (InterruptedException e) {
                     interrupted = true;
@@ -65,9 +64,10 @@ public class AccountManager {
     }
 
     public boolean submit(TransferTask transfer) {
-        if (shutdown) return false;
-        pending.add(transfer);
-        return true;
+        if (shutdown) {
+            return false;
+        }
+        return pending.add(transfer);
     }
 
     public void await() throws InterruptedException {
@@ -77,6 +77,5 @@ public class AccountManager {
 
     public void shutdown() {
         shutdown = true;
-        withdrawals.interrupt();
     }
 }

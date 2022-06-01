@@ -13,7 +13,4 @@ public class NumberService {
         return 42L;
     }
 
-    void foo() {
-        Stream.of().parallel();
-    }
 }
