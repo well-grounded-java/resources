@@ -80,7 +80,8 @@ cd Ch02
 # Compile the example
 javac -d out wgjd.sitecheck/module-info.java \
   wgjd.sitecheck/wgjd/sitecheck/*.java \
-  wgjd.sitecheck/wgjd/sitecheck/*/*.java
+  wgjd.sitecheck/wgjd/sitecheck/concurrent/*.java \
+  wgjd.sitecheck/wgjd/sitecheck/internal/*.java
 
 # Run the example
 java -cp out wgjd.sitecheck.SiteCheck http://github.com/well-grounded-java
